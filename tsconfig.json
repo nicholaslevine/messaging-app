@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2023",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "./backend/dist",
+    "rootDir": "./backend"
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["./backend/src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "frontend"]
+}
