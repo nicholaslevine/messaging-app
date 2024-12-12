@@ -2,11 +2,12 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "target": "ES2023",
+    "target": "ES2022",
     "strict": true,
     "esModuleInterop": true,
     "outDir": "./backend/dist",
-    "rootDir": "./backend"
+    "rootDir": "./backend",
+    "types": ["node", "express"]
   },
   "ts-node": {
     "esm": true

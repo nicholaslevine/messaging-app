@@ -25,9 +25,8 @@ const protectRoute = async (req: Request, res: Response, next: NextFunction): Pr
         const token = req.cookies.jwt;
         
         if (!token) {
-            res.status(401).json({ error: "Unauthorized - No token provided" });
+            return res.status(401).json({ error: "Unauthorized - No token provided" });
         }
-        else {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
 
@@ -50,19 +49,21 @@ const protectRoute = async (req: Request, res: Response, next: NextFunction): Pr
 
         req.user = user;
         next();
-    }
 
     } catch (err) {
         if (err instanceof TokenExpiredError) {
-            return res.status(401).json({ error: "Unauthorized - Token expired" });
+            res.status(401).json({ error: "Unauthorized - Token expired" });
+            next(err);
         }
 
         if (err instanceof JsonWebTokenError) {
-            return res.status(401).json({ error: "Unauthorized - Invalid token" });
+            res.status(401).json({ error: "Unauthorized - Invalid token" });
+            next(err);
         }
 
         console.error("Protect route error:", err);
         res.status(500).json({ error: "Internal server error" });
+        next(err);
     }
 }
 
