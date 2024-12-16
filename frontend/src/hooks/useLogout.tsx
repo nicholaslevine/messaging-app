@@ -3,11 +3,6 @@ import { useAuthContext } from "../context/authContext";
 import toast from "react-hot-toast";
 
 function useLogout(){
-    try {
-        
-    } catch (error) {
-        
-    }
     const [loading, setLoading] = useState(false);
     const {setAuthUser} = useAuthContext();
 

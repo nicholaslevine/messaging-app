@@ -1,14 +1,32 @@
+import useConversation from "../../zustand/useConversation";
+
 const Conversation = ({conversation} : {conversation: any}) => {
+    const {setSelectedConversation, selectedConversation} = useConversation();
+    const isSelected = selectedConversation?.id === conversation.id;
+
     return (
-        <>
-        <div className="flex gap-2 items-center hover:bg-sky rounded p-2 py-1 cursor-poiner">
-            <div className="w-8 md:w-12 rounded-full">
-                <p className="font-bold text-gray-200 text-sm md:text-md">{conversation.fullName}</p>
-                <span className="text-x1 hidden md:inline-block">{conversation.emoji}</span>
+    <>
+        <div
+        className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer ${isSelected ? "bg-sky-500" : ""}`}
+        onClick={() => setSelectedConversation(conversation)}>
+            <div className="avatar">
+                <div className="w-8 md:w-12 rounded-full">
+                    <img src={conversation.profile} alt="user avatar" />
+                </div>
             </div>
+
+            <div className="flex flex-col flex-1">
+                <div className="flex gap-3 justify-between">
+                    <p className="font-bold text-gray-200 text-sm md:text-md">
+                        {conversation.fullName}
+                    </p>
+                </div>
+
+            </div>
+
         </div>
-        <div className="divider my-0 py-0 h-1"></div>
-        </>
+        <div className="dividier my-0 py-0 -1" />
+    </>
 
     )
 };
